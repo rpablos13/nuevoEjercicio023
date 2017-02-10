@@ -31,18 +31,18 @@ public class MyUI extends UI {
 	private Grid maestro;
 	private PeliculasForm detalle;
 	
-	private List<Peliculas> alumnosClase;
+	private List<Peliculas> listaPeliculas;
 	
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
         
-        alumnosClase = new ArrayList<>();
-        alumnosClase.add(new Peliculas("Roberto", "Alcazar"));
-        alumnosClase.add(new Peliculas("Pedrín", "NN"));
+        listaPeliculas = new ArrayList<>();
+        listaPeliculas.add(new Peliculas("Into the wild", "Sean Penn", 10, 2, "Amerrica"));
+        listaPeliculas.add(new Peliculas("127 horas", "Noi tengo ni idea", 10, 2, "Amerrica"));
         
         maestro = new Grid();
-        maestro.setColumns("firstName", "lastName");
+        maestro.setColumns("titulo", "director", "notaImdb", "duracion", "nacionalidad");
         
         cargaGrid();
         
@@ -52,7 +52,7 @@ public class MyUI extends UI {
         		if (!e.getSelected().isEmpty() ) {
 	        		p = (Peliculas) e.getSelected().iterator().next();
         		} 
-        		detalle.setPersona(p);
+        		detalle.setPeliculas(p);
         	});
         
         detalle = new PeliculasForm(this);
@@ -69,7 +69,7 @@ public class MyUI extends UI {
 
 	public void cargaGrid() {
 		maestro.setContainerDataSource(
-        		new BeanItemContainer<>(Peliculas.class, alumnosClase)
+        		new BeanItemContainer<>(Peliculas.class, listaPeliculas)
         );
 	}
 

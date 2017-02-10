@@ -8,11 +8,25 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 
 public class PeliculasForm extends FormLayout {
-	@PropertyId("firstName")
-	protected TextField firstName;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3949325445848506975L;
+
+	@PropertyId("titulo")
+	protected TextField titulo;
 	
-	@PropertyId("lastName")
-	protected TextField lastName;
+	@PropertyId("director")
+	protected TextField director;
+	
+	@PropertyId("notaImdb")
+	protected TextField notaImdb;
+	
+	@PropertyId("duracion")
+	protected TextField duracion;
+	
+	@PropertyId("nacionalidad")
+	protected TextField nacionalidad;
 	
 	private Button accion;
 	
@@ -23,19 +37,23 @@ public class PeliculasForm extends FormLayout {
 	public PeliculasForm(MyUI padre) {
 		this.padre = padre;
 		
-		firstName = new TextField("Nombre: ");
-		lastName= new TextField("Apellido: ");
+		titulo = new TextField("Titulo: ");
+		director= new TextField("Director: ");
+		notaImdb = new TextField("Nota IMDB: ");
+		duracion= new TextField("Duracion: ");
+		nacionalidad = new TextField("Nacionalidad: ");
+		
 		
 		accion = new Button("Actualizar");
 		accion.addClickListener(e -> padre.cargaGrid());
 		
-		addComponents(firstName, lastName, accion);
+		addComponents(titulo, director, notaImdb, duracion, nacionalidad, accion);
 		
 
-		setPersona(null);
+		setPeliculas(null);
 	}
 
-	public void setPersona(Peliculas peliculas) {
+	public void setPeliculas(Peliculas peliculas) {
 		this.setVisible(peliculas != null);
 		this.peliculas = peliculas;
 
