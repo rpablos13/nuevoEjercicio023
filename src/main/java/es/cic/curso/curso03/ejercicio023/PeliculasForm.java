@@ -1,4 +1,4 @@
-package es.cic.curso.curso03;
+package es.cic.curso.curso03.ejercicio023;
 
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
@@ -16,7 +16,7 @@ public class PeliculasForm extends FormLayout {
 	
 	private Button accion;
 	
-	private Persona persona;
+	private Peliculas peliculas;
 	
 	private MyUI padre;
 	
@@ -36,10 +36,10 @@ public class PeliculasForm extends FormLayout {
 	}
 
 	public void setPersona(Peliculas peliculas) {
-		this.setVisible(persona != null);
-		this.persona = persona;
+		this.setVisible(peliculas != null);
+		this.peliculas = peliculas;
 
-		if (persona != null) {
+		if (peliculas != null) {
 			BeanFieldGroup.bindFieldsUnbuffered(peliculas, this);
 		} else {
 			BeanFieldGroup.bindFieldsUnbuffered(new Peliculas(), this);

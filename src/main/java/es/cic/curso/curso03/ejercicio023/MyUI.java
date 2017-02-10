@@ -1,4 +1,4 @@
-package es.cic.curso.curso03;
+package es.cic.curso.curso03.ejercicio023;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class MyUI extends UI {
         	{
         		Peliculas p = null;
         		if (!e.getSelected().isEmpty() ) {
-	        		p = (Persona) e.getSelected().iterator().next();
+	        		p = (Peliculas) e.getSelected().iterator().next();
         		} 
         		detalle.setPersona(p);
         	});

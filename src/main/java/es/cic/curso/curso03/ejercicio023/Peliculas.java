@@ -1,4 +1,4 @@
-package es.cic.curso.curso03;
+package es.cic.curso.curso03.ejercicio023;
 
 import com.vaadin.ui.TextField;
 
