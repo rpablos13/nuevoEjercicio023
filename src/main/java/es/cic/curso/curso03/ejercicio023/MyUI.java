@@ -1,6 +1,7 @@
 package es.cic.curso.curso03.ejercicio023;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +13,10 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import es.cic.curso.curso03.ejercicio023.Peliculas;
+
 
 
 /**
@@ -28,24 +29,32 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 public class MyUI extends UI {
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8050612037563728882L;
 	private Grid maestro;
 	private PeliculasForm detalle;
 	
 	private List<Peliculas> listaPeliculas;
 	
+	private Button aniadir;
+	private Button borrar;
+	
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
-        
+   
         listaPeliculas = new ArrayList<>();
         listaPeliculas.add(new Peliculas("Into the wild", "Sean Penn", 10, 2, "Amerrica"));
-        listaPeliculas.add(new Peliculas("127 horas", "Noi tengo ni idea", 10, 2, "Amerrica"));
+        listaPeliculas.add(new Peliculas("127 horas", "Danny Boyle", 10, 2, "Amerrica"));
         
         maestro = new Grid();
         maestro.setColumns("titulo", "director", "notaImdb", "duracion", "nacionalidad");
         
         cargaGrid();
         
+
         maestro.addSelectionListener(e -> 
         	{
         		Peliculas p = null;
@@ -54,19 +63,34 @@ public class MyUI extends UI {
         		} 
         		detalle.setPeliculas(p);
         	});
+
+        
+        aniadir = new Button("Nuevo");
+        aniadir.addClickListener(e ->
+        {
+        	
+        	 
+        	Peliculas peliculas = new Peliculas("Titulo","Director", 10, 34, "Nacionalidad");
+
+        	detalle.setPeliculas(peliculas);
+        	listaPeliculas.add(peliculas);
+        	
+       
+        });
         
         detalle = new PeliculasForm(this);
         
-        
-        layout.addComponents(maestro, detalle);
+        layout.addComponents(maestro, detalle, aniadir, borrar);
         layout.setMargin(true);
         layout.setSpacing(true);
+
        
         
         
         setContent(layout);
     }
 
+	
 	public void cargaGrid() {
 		maestro.setContainerDataSource(
         		new BeanItemContainer<>(Peliculas.class, listaPeliculas)
@@ -76,5 +100,10 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7073647542692806315L;
     }
 }

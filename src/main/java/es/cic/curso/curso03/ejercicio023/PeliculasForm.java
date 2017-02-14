@@ -4,7 +4,6 @@ import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.PropertyId;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 
 public class PeliculasForm extends FormLayout {
@@ -29,13 +28,10 @@ public class PeliculasForm extends FormLayout {
 	protected TextField nacionalidad;
 	
 	private Button accion;
-	
-	private Peliculas peliculas;
-	
-	private MyUI padre;
+	private Button nuevo;
+	private Button borrar;
 	
 	public PeliculasForm(MyUI padre) {
-		this.padre = padre;
 		
 		titulo = new TextField("Titulo: ");
 		director= new TextField("Director: ");
@@ -44,7 +40,14 @@ public class PeliculasForm extends FormLayout {
 		nacionalidad = new TextField("Nacionalidad: ");
 		
 		
-		accion = new Button("Actualizar");
+		accion = new Button("Añadir");
+		nuevo = new Button("Nuevo");
+		borrar = new Button("Borrar");
+		
+		borrar.removeClickListener(e -> padre.cargaGrid());
+		
+		nuevo.addClickListener(e -> padre.cargaGrid());
+		
 		accion.addClickListener(e -> padre.cargaGrid());
 		
 		addComponents(titulo, director, notaImdb, duracion, nacionalidad, accion);
@@ -55,8 +58,6 @@ public class PeliculasForm extends FormLayout {
 
 	public void setPeliculas(Peliculas peliculas) {
 		this.setVisible(peliculas != null);
-		this.peliculas = peliculas;
-
 		if (peliculas != null) {
 			BeanFieldGroup.bindFieldsUnbuffered(peliculas, this);
 		} else {

@@ -3,6 +3,7 @@ package es.cic.curso.curso03.ejercicio023;
 import static org.junit.Assert.*;
 
 
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,11 +19,12 @@ public class TestPeliculas {
 	
 	@Test
 
-	public void testCrearFlujo() {
+	public void test() {
 	
 		assertTrue(true);
 
 	}
+
 
 
 
